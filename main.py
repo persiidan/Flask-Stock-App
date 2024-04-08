@@ -28,6 +28,7 @@ def fetch_stocks(symbol):
     except Exception as e:
         print(f"Eror fetching data for {symbol}: {e}")
     return None,None
+    
 @app.route('/fetch_stock',methods=['post'])
 def fetch_and_store_stock():
     symbol = request.form.get('symbol')
@@ -38,6 +39,7 @@ def fetch_and_store_stock():
         cursor.execute("INSERT INTO stocks (symbol,price)VALUES (?,?)",(symbol,price))
         return f"stock data fetched and stored: {symbol} - {price}"
     return "Failed to fetch and store stock data"
+    
 @app.route('/')
 def display_stocks():
     conn = get_db_connection()
